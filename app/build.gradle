@@ -1,0 +1,88 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.andro.indie.school.pokedex"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion '1.4.30'
+    }
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+
+    implementation(project(":core"))
+
+    implementation androidLibs.ktx
+    implementation androidLibs.lifecycleKtx
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation androidLibs.paletteKtx
+
+    implementation androidLibs.composeUi
+    implementation androidLibs.composeMaterial
+    implementation androidLibs.composeUiTooling
+    implementation androidLibs.composeRuntime
+    implementation androidLibs.composeActivity
+    implementation androidLibs.composeViewModel
+    implementation androidLibs.composeNavigation
+
+    implementation networkLibs.okhttp3
+    implementation networkLibs.okhttp3Log
+
+    implementation networkLibs.retrofit
+    implementation networkLibs.retrofitMoshiAdapter
+
+    implementation networkLibs.moshi
+    kapt networkLibs.moshiCompiler
+
+    implementation injectionLibs.hilt
+    kapt injectionLibs.hiltCompiler
+    implementation injectionLibs.hiltNavigation
+    implementation injectionLibs.hiltViewModel
+    kapt injectionLibs.hiltJetpackCompiler
+
+    implementation uiLibs.coilAccompanist
+    implementation uiLibs.insetsAccompanist
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
